@@ -1,4 +1,5 @@
-import express, {Request, Response, NextFunction} from "express";
+import express from "express";
+import statusRoutes from "./routes/status.routes";
 import usersRoute from "./routes/users.routes";
 const app = express();
 
@@ -7,10 +8,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* Configurações de rotas */
-app.use(usersRoute);
-app.get("/status", (req: Request, res: Response, next: NextFunction) => {
-  res.status(200).send({foo: "bar"});
-});
+app.use(usersRoute);      /* Rotas de users (CRUD básico) */
+app.use(statusRoutes);    /* Rota de status */
 
 /* Inicialização do servidor */
 app.listen(4000, () => {
